@@ -298,11 +298,18 @@
         '<span class="card-link">Read the piece ' + ARROW + '</span>' +
       '</span></a>';
   }
+  var OTI = document.documentElement.getAttribute('data-mascot') !== 'off';
+  var OTI_LOOK = { popcorn: 'movie', clipboard: 'manager', heart: 'fan', phone: 'caller' };
+  function oti(variant, prop, style, sign, flip) {
+    if (!OTI) return '';
+    return '<div class="ot ot-' + variant + (flip ? ' flip' : '') + '" style="' + style + '" aria-hidden="true"><div class="ot-rig" data-oti="' + (OTI_LOOK[prop] || 'classic') + '"></div>' +
+      (sign ? '<span class="ot-sign"><b>' + sign + '</b></span>' : '') + '</div>';
+  }
   function demoTheme() { return document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'; }
   window.solviqoDemoTheme = demoTheme;
   function demoHtml(c) {
     if (!c.demo) return '';
-    return '<div class="demo-wrap"><div class="flow-head"><h3>Watch it work</h3><span class="flow-legend">A one minute walkthrough of the real flow, with sample data</span></div>' +
+    return '<div class="demo-wrap has-ot">' + oti('peek', 'popcorn', 'right:-34px;top:-70px;width:108px', null, true) + '<div class="flow-head"><h3>Watch it work</h3><span class="flow-legend">A one minute walkthrough of the real flow, with sample data</span></div>' +
       '<iframe class="demo-frame" src="' + esc(c.demo) + '?v=3&theme=' + demoTheme() + '" title="Walkthrough of ' + esc(c.title) + '" loading="lazy"></iframe></div>';
   }
   document.querySelectorAll('iframe.demo-frame[data-src]').forEach(function (f) { f.src = f.getAttribute('data-src') + '&theme=' + demoTheme(); });
@@ -363,6 +370,7 @@
         detail.hidden = false;
         if (!p) { detail.innerHTML = '<a class="back-link" href="blog.html">&larr; All articles</a><p>That article moved or never existed.</p>'; return; }
         var rel = posts.filter(function (x) { return x.slug !== p.slug; }).slice(0, 2);
+        setTimeout(function () { if (window.otiFill) window.otiFill(detail); }, 0);
         detail.innerHTML =
           '<a class="back-link" href="blog.html">&larr; All articles</a>' +
           '<div class="cover-wide"><canvas data-seed="' + esc(p.title) + '" data-ratio="21/9"' + (p.art !== undefined ? ' data-kind="' + esc(p.art) + '"' : '') + '></canvas></div>' +
@@ -370,7 +378,7 @@
           '<h1 class="chrome-text">' + esc(p.title) + '</h1>' +
           '<p class="post-byline">' + fmtDate(p.date) + ' &middot; ' + esc(p.readTime) + ' &middot; by Solviqo Studio</p></div>' +
           '<div class="post-body">' + p.body.map(block).join('') + '</div>' +
-          '<div class="panel pad post-cta"><h3>Have this exact problem?</h3>' +
+          '<div class="panel pad post-cta has-ot">' + oti('sign', 'heart', 'right:-20px;top:-86px;width:110px', 'Thanks for reading!', true) + '<h3>Have this exact problem?</h3>' +
           '<p style="color:var(--t2);margin-top:10px">Twenty minutes on a call is enough to know if a sprint fixes it.</p>' +
           '<a class="btn btn-primary" style="margin-top:18px" href="contact.html">Book a scoping call<span class="shine"></span></a></div>' +
           (rel.length ? '<div class="related"><div class="kick"><b></b> More from the studio</div><div class="grid2 stag in" style="margin-top:22px">' + rel.map(postCard).join('') + '</div></div>' : '');
@@ -396,6 +404,7 @@
         if (!detail) return;
         detail.hidden = false;
         if (!c) { detail.innerHTML = '<a class="back-link" href="case-studies.html">&larr; All case studies</a><p>That engagement moved or never existed.</p>'; return; }
+        setTimeout(function () { if (window.otiFill) window.otiFill(detail); }, 0);
         detail.innerHTML =
           '<a class="back-link" href="case-studies.html">&larr; All case studies</a>' +
           '<div class="cover-wide"><canvas data-seed="' + esc(c.title) + '" data-ratio="21/9"' + (c.art !== undefined ? ' data-kind="' + esc(c.art) + '"' : '') + '></canvas></div>' +

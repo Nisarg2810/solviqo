@@ -284,6 +284,7 @@
     ['Action', 'Book a call', 'contact.html'], ['Action', 'Email studio@solviqo.com', 'mailto:studio@solviqo.com'],
     ['Action', 'Switch light or dark mode', '#theme']
   ];
+  if (window.SV_PAGES) window.SV_PAGES.forEach(function (p) { ITEMS.push(p); });
   var loaded = false;
   function loadMore() {
     if (loaded) return; loaded = true;
