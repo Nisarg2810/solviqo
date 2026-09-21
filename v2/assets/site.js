@@ -508,7 +508,7 @@
       var email = (doc.getElementById('f-email').value || '').trim();
       var msg = (doc.getElementById('f-msg').value || '').trim();
       var body = 'Name: ' + name + '\nEmail: ' + email + '\n\nThe workflow costing us most:\n' + msg;
-      window.location.href = 'mailto:studio@solviqo.com?subject=' +
+      window.location.href = 'mailto:solviqodigital@gmail.com?subject=' +
         encodeURIComponent('A gap worth closing') + '&body=' + encodeURIComponent(body);
       doc.getElementById('formOk').classList.add('on');
     });
