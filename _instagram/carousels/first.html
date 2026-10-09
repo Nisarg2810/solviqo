@@ -1,0 +1,127 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=block" rel="stylesheet">
+<style>
+:root{--paper:#EEF1F6;--steel:#9FAABA;--steel2:#5B6779;--amber:#E8890C;--signal:#4C7DFF}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1350px;overflow:hidden;background:#0B0F18}
+.s{position:relative;width:1080px;height:1350px;overflow:hidden;color:var(--paper);font-family:'IBM Plex Sans',sans-serif;
+  background:radial-gradient(900px 700px at 8% 0%,#22304C 0%,rgba(34,48,76,0) 62%),radial-gradient(700px 600px at 100% 62%,rgba(76,125,255,.20),rgba(76,125,255,0) 65%),radial-gradient(500px 400px at 30% 70%,rgba(232,137,12,.10),rgba(0,0,0,0) 70%),linear-gradient(165deg,#131A29,#0B0F18 55%,#070A10)}
+.grain{position:absolute;inset:0;opacity:.14;mix-blend-mode:overlay;pointer-events:none;z-index:50;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.gridlines{position:absolute;inset:0;opacity:.35;background-image:linear-gradient(rgba(159,170,186,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(159,170,186,.06) 1px,transparent 1px);background-size:60px 60px;
+  -webkit-mask-image:radial-gradient(700px 500px at 55% 62%,#000,transparent 75%)}
+.top{position:absolute;left:84px;right:84px;top:72px;display:flex;justify-content:space-between;align-items:center;font:500 24px 'IBM Plex Mono';letter-spacing:.16em;color:var(--steel);z-index:10}
+.brand{display:flex;align-items:center;gap:14px}
+h1{position:absolute;left:84px;top:150px;width:920px;font:800 86px/1.02 'Unbounded';letter-spacing:-.04em;z-index:10}
+h1 .am{color:var(--amber)}
+/* ---------- the mess (left) ---------- */
+.chip{position:absolute;display:flex;align-items:center;gap:12px;padding:14px 22px;border-radius:12px;font:500 24px 'IBM Plex Mono';color:#B5BFCD;white-space:nowrap;
+  background:linear-gradient(180deg,#1E2739,#151C2A);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 20px 40px rgba(0,0,0,.5)}
+.chip i{width:20px;height:24px;border-radius:4px;background:#1F7A45;position:relative;flex:none}
+.chip i::after{content:"";position:absolute;inset:5px 4px;border-top:3px solid rgba(255,255,255,.75);border-bottom:3px solid rgba(255,255,255,.75)}
+.register{position:absolute;left:40px;top:600px;width:330px;height:420px;border-radius:10px;transform:rotate(-11deg);z-index:1;
+  background:repeating-linear-gradient(180deg,#E9E2CF 0 37px,#BFC9D9 37px 39px),#E9E2CF;box-shadow:0 30px 60px rgba(0,0,0,.6);filter:brightness(.62) saturate(.7)}
+.register::before{content:"";position:absolute;left:52px;top:0;bottom:0;width:2px;background:#D46A6A}
+.register span{white-space:nowrap;position:absolute;left:68px;font:400 22px 'IBM Plex Mono';color:#2B3550;transform:rotate(-1deg)}
+.phone{position:absolute;left:150px;top:490px;width:390px;height:620px;border-radius:56px;transform:rotate(-7deg);z-index:4;padding:14px;
+  background:linear-gradient(145deg,#3A4456,#141A26 40%,#0C1018);box-shadow:inset 0 2px 0 rgba(255,255,255,.18),0 60px 100px rgba(0,0,0,.7),0 0 0 2px #05070B}
+.screen{width:100%;height:100%;border-radius:44px;overflow:hidden;background:#0E1A17;position:relative}
+.screen::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.03) 2px,transparent 3px) 0 0/34px 34px}
+.bar{position:relative;display:flex;align-items:center;gap:14px;padding:46px 20px 16px;background:#1A2723}
+.av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#2E7D5B,#1C4D3A);display:grid;place-items:center;font-size:24px}
+.bar b{font:600 22px 'IBM Plex Sans';display:block}
+.bar small{font:400 15px 'IBM Plex Sans';color:#8FA39B}
+.badge{margin-left:auto;background:#25D366;color:#06130D;font:700 17px 'IBM Plex Sans';padding:4px 10px;border-radius:20px}
+.msgs{position:relative;padding:14px 14px 0;display:flex;flex-direction:column;gap:10px}
+.m{max-width:82%;padding:9px 13px 7px;border-radius:12px;background:#1F2C28;font:400 18px/1.3 'IBM Plex Sans';color:#E3E9E6}
+.m.me{align-self:flex-end;background:#144D37}
+.m u{display:block;text-decoration:none;font:600 14px 'IBM Plex Sans';margin-bottom:2px}
+.m em{display:block;text-align:right;font:400 12px 'IBM Plex Sans';color:#8FA39B;font-style:normal}
+.m.img{padding:5px;width:200px}
+.m.img div{height:110px;border-radius:9px;background:linear-gradient(135deg,#5E6A5A,#2E3A33);position:relative;overflow:hidden}
+.m.img div::after{content:"CHALLAN #4471";position:absolute;left:12px;top:12px;font:500 13px 'IBM Plex Mono';color:rgba(255,255,255,.55);transform:rotate(-4deg);border:1px dashed rgba(255,255,255,.35);padding:30px 18px}
+.sticky{position:absolute;left:432px;top:860px;width:210px;height:200px;z-index:6;transform:rotate(8deg);padding:30px 22px;
+  background:linear-gradient(170deg,#FFD866,#F2C443);box-shadow:0 26px 40px rgba(0,0,0,.55);font:500 31px/1.15 'Caveat','Marker Felt','Comic Sans MS',cursive;color:#3A2A05}
+.sticky::before{content:"";position:absolute;left:60px;top:-14px;width:90px;height:30px;background:rgba(255,255,255,.45);transform:rotate(-4deg)}
+.tag{position:absolute;font:500 18px 'IBM Plex Mono';letter-spacing:.14em;color:var(--steel2);z-index:10}
+/* ---------- arrow ---------- */
+.arrow{position:absolute;left:548px;top:690px;z-index:7}
+/* ---------- the app (right) ---------- */
+.app{position:absolute;left:640px;top:560px;width:380px;border-radius:30px;z-index:8;transform:rotate(3deg);padding:28px 26px;
+  background:linear-gradient(180deg,#F7F9FC,#E6EBF2);color:#0B0F18;box-shadow:inset 0 1px 0 #fff,0 70px 120px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.4),0 0 90px rgba(76,125,255,.25)}
+.app .hd{display:flex;justify-content:space-between;align-items:center;font:500 15px 'IBM Plex Mono';letter-spacing:.12em;color:#5B6779}
+.app .hd .live{display:flex;align-items:center;gap:7px;color:#1C8C55}
+.app .hd .live::before{content:"";width:9px;height:9px;border-radius:50%;background:#1FB866;box-shadow:0 0 0 4px rgba(31,184,102,.2)}
+.app h3{font:700 30px 'Unbounded';letter-spacing:-.02em;margin:14px 0 4px}
+.app .big{display:flex;align-items:baseline;gap:12px;margin:12px 0 16px}
+.app .big b{font:800 64px/1 'Unbounded';letter-spacing:-.04em}
+.app .big span{font:500 18px 'IBM Plex Sans';color:#5B6779}
+.bars{display:flex;gap:7px;align-items:flex-end;height:64px;margin-bottom:18px}
+.bars i{flex:1;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#6E95FF,#4C7DFF)}
+.bars i.o{background:#CBD3E0}
+.row{display:flex;align-items:center;gap:12px;padding:13px 0;border-top:1.5px solid #D5DBE5;font:500 19px 'IBM Plex Sans'}
+.row .pl{font:500 15px 'IBM Plex Mono';color:#5B6779;width:66px}
+.pill{margin-left:auto;font:600 14px 'IBM Plex Sans';padding:5px 11px;border-radius:20px}
+.ok{background:#D9F3E5;color:#137544}.wt{background:#FDEBD3;color:#A35A00}.ld{background:#DEE6FF;color:#2F55C8}
+.mini{position:absolute;left:640px;top:1020px;z-index:9;transform:rotate(-2deg);display:flex;align-items:center;gap:12px;padding:16px 20px;border-radius:16px;
+  background:linear-gradient(180deg,#1E2739,#151C2A);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 24px 50px rgba(0,0,0,.55);font:500 19px 'IBM Plex Sans';color:#DDE3EC}
+.mini b{width:34px;height:34px;border-radius:10px;background:var(--amber);display:grid;place-items:center;color:#0B0F18;font:800 18px 'Unbounded'}
+/* ---------- footer ---------- */
+.scrim{position:absolute;left:0;right:0;bottom:0;height:300px;z-index:9;background:linear-gradient(180deg,rgba(9,12,19,0),rgba(9,12,19,.92) 45%,#090C13)}
+.foot{position:absolute;left:84px;right:84px;bottom:74px;display:flex;justify-content:space-between;align-items:flex-end;z-index:10}
+.foot p{font:500 29px/1.35 'IBM Plex Sans';color:#C9D0DB;width:600px}
+.foot p b{color:var(--paper);font-weight:600}
+.cta{display:flex;align-items:center;gap:14px;padding:22px 30px;border-radius:18px;background:linear-gradient(180deg,#F39A22,#E8890C 60%,#C9740A);color:#0B0F18;
+  font:700 24px 'Unbounded';letter-spacing:-.01em;box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 20px 40px rgba(232,137,12,.3)}
+.cta small{display:block;font:500 15px 'IBM Plex Mono';letter-spacing:.12em;opacity:.75;margin-bottom:4px}
+</style></head><body>
+<div class="s">
+  <div class="gridlines"></div>
+  <div class="top"><div class="brand"><svg width="48" height="48" viewBox="0 0 240 240"><defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#C9D1DD"/><stop offset="1" stop-color="#8E99AB"/></linearGradient></defs><g fill="none" stroke-width="18" stroke-linecap="square"><polyline points="-27,-30 28,0 -27,30" stroke="#5B6779" transform="translate(70,168) rotate(-25) scale(.62)"/><polyline points="-27,-30 28,0 -27,30" stroke="#9FAABA" transform="translate(118,128) rotate(-12) scale(.82)"/><polyline points="-27,-30 28,0 -27,30" stroke="url(#cg)" transform="translate(172,72) rotate(2) scale(1.05)"/></g></svg>SOLVIQO</div><div>@SOLVIQO</div></div>
+
+  <h1>Your business <span class="am">already</span> has software.</h1>
+
+  <!-- the mess -->
+  <div class="tag" style="left:96px;top:440px">TODAY</div>
+  <div class="tag" style="left:700px;top:440px;color:var(--signal)">IN 3 WEEKS</div>
+  <div class="chip" style="left:300px;top:430px;transform:rotate(5deg);z-index:2"><i></i>orders_FINAL_v3.xlsx</div>
+  <div class="chip" style="left:24px;top:500px;transform:rotate(-9deg);z-index:2"><i></i>stock_roughly.xlsx</div>
+  
+  <div class="register"><span style="top:44px">12/9  Tata 407  in 9:40</span><span style="top:84px">12/9  MH04 ..  in 10:1?</span><span style="top:124px">13/9  ???</span><span style="top:164px">13/9  see Ramesh</span></div>
+  <div class="phone"><div class="screen">
+    <div class="bar"><div class="av">🚚</div><div><b>Dispatch Updates</b><small>Ramesh, Sunil, Priya, +38</small></div><div class="badge">312</div></div>
+    <div class="msgs">
+      <div class="m"><u style="color:#E8A34C">Sunil</u>sir pls check challan<em>7:02</em></div>
+      <div class="m img"><div></div></div>
+      <div class="m"><u style="color:#6FB3FF">Priya</u>which sheet is final?? v3 or v4<em>7:05</em></div>
+      <div class="m me">truck 4 left or not?<em>7:09</em></div>
+      <div class="m"><u style="color:#E8A34C">Sunil</u>ask Ramesh<em>7:11</em></div>
+      <div class="m"><u style="color:#C38CFF">Ramesh</u>on leave today 🙏<em>7:30</em></div>
+      <div class="m me">??<em>7:31</em></div>
+    </div>
+  </div></div>
+  <div class="sticky">ask Ramesh!!<br><span style="font-size:24px">(he knows the rates)</span></div>
+
+  <!-- arrow: the sweep chevrons -->
+  <svg class="arrow" width="130" height="130" viewBox="0 0 240 240"><g fill="none" stroke-width="20" stroke-linecap="square"><polyline points="-27,-30 28,0 -27,30" stroke="#3C475A" transform="translate(60,120) scale(.7)"/><polyline points="-27,-30 28,0 -27,30" stroke="#9FAABA" transform="translate(115,120) scale(.85)"/><polyline points="-27,-30 28,0 -27,30" stroke="#E8890C" transform="translate(178,120) scale(1.05)"/></g></svg>
+
+  <!-- the app -->
+  <div class="app">
+    <div class="hd"><span>DISPATCH</span><span class="live">LIVE</span></div>
+    <h3>Today’s yard</h3>
+    <div class="big"><b>14</b><span>trucks · 9 out on time</span></div>
+    <div class="bars"><i style="height:40%"></i><i style="height:62%"></i><i style="height:55%"></i><i style="height:80%"></i><i style="height:70%"></i><i style="height:95%"></i><i class="o" style="height:30%"></i></div>
+    <div class="row"><span class="pl">TRK 04</span>Left 7:08<span class="pill ok">Out</span></div>
+    <div class="row"><span class="pl">TRK 07</span>Bay 2<span class="pill ld">Loading</span></div>
+    <div class="row"><span class="pl">TRK 11</span>Challan pending<span class="pill wt">Waiting</span></div>
+  </div>
+  <div class="mini"><b>₹</b>Rates: one place. Not one person.</div>
+
+  <div class="scrim"></div><div class="foot">
+    <p>A WhatsApp group, three Excel files and Ramesh. <b>We turn it into one app.</b> Fixed price. Live in weeks.</p>
+    <div class="cta"><div><small>FREE TEARDOWN</small>Comment AUTOPSY</div></div>
+  </div>
+  <div class="grain"></div>
+</div>
+</body></html>
